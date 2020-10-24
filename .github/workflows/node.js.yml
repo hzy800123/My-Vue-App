@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -42,6 +42,6 @@ jobs:
         # Remote user **填入自己的用户,一般都是root用户**:  
         REMOTE_USER: "root"
         # Target directory 此处填写的是我域名下的action path **填入自己的域名路径**:  
-        TARGET: "/home/john/nodejs/nodejs-app/client"   
+        TARGET: "/home/john/nodejs/nodejs-app/client/dist"   
         
  
