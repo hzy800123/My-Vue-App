@@ -1,0 +1,46 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - name: Deploy
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env: 
+         # Private Key secrets.ALIYUN 就是配置的密钥名
+        SSH_PRIVATE_KEY: ${{ ALICLOUD_2_KEY }} 
+        # For any initial/required rsync flags
+        ARGS:  "-rltgoDzvO --delete"
+        # Source directory dist/ 需要到远端服务器的文件目录 **填入自己的打包路径**
+        SOURCE: "dist/"
+        # Remote host **填入自己的域名**:  
+        REMOTE_HOST: "120.77.2.123"
+        # Remote user **填入自己的用户,一般都是root用户**:  
+        REMOTE_USER: "root"
+        # Target directory 此处填写的是我域名下的action path **填入自己的域名路径**:  
+        TARGET: "/home/john/nodejs/nodejs-app/client"   
+        
+ 
