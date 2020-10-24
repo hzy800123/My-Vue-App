@@ -1,13 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-
-    <!-- <hr>
-    <pre>{{ items }}</pre>
-    <hr> -->
-
     <pre>
-      <b-table :items="items" :fields="fields" :tbody-tr-class="rowClass"></b-table>
+      <b-table striped hover :items="items" :fields="fields" :tbody-tr-class="rowClass"></b-table>
     </pre>
   </div>
 </template>
@@ -23,11 +18,19 @@ export default {
     }
   },
   mounted () {
-    // this.axios.post('https://www.appvip2020.net/book/GetAllBook').then(
+    // this.items = [
+    //   {'userName': 'Jack', 'age': 12},
+    //   {'userName': 'Tom', 'age': 10}
+    // ]
+
     this.axios.post('https://www.appvip2020.net/nodejsapi/user')
       .then(
         body => {
           this.items = body.data
+        }
+      ).catch(
+        err => {
+          console.log(err)
         }
       )
   }
@@ -36,8 +39,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* ul {
-  list-style-type: none;
-  text-align: middle;
-} */
 </style>
