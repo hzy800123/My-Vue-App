@@ -31,7 +31,7 @@ jobs:
       uses: easingthemes/ssh-deploy@v2.1.5
       env: 
          # Private Key secrets.ALIYUN 就是配置的密钥名
-        SSH_PRIVATE_KEY: ${{ ALICLOUD_2_KEY }} 
+        SSH_PRIVATE_KEY: ${{ secrets.ALICLOUD_2_KEY }} 
         # For any initial/required rsync flags
         ARGS:  "-rltgoDzvO --delete"
         # Source directory dist/ 需要到远端服务器的文件目录 **填入自己的打包路径**
