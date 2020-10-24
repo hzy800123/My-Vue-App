@@ -17,7 +17,7 @@ export default {
   name: 'LearnAxios',
   data () {
     return {
-      msg: 'Learn axios: Welcome to My Vue.js App',
+      msg: 'Welcome to My VueJS App - learn axios',
       fields: ['userName', 'age'],
       items: []
     }
